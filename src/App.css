@@ -1,38 +1,44 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.app-title {
+  font-family: 'Roboto', sans-serif; /* Font family */
+  font-size: 3rem; /* Font size */
+  text-align: center; /* Center the title */
+  color: #0a0d4b; /* Title color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow for a 3D effect */
+  margin-top: 20px; /* Margin at the top */
+  font-weight: 700; /* Numeric value for bold text */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app-container {
+  display: flex; /* Use Flexbox for layout */
+  flex-direction: column; /* Stack elements vertically */
+  padding: 20px; /* Add some padding around the content */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Header containing the button groups */
+.header {
+  display: flex; /* Use Flexbox for layout */
+  justify-content: space-between; /* Space between left and right sections */
+  align-items: center; /* Center items vertically */
+  margin-bottom: 20px; /* Space below the header */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Container for the left section (dropdowns and filter) */
+.left-section {
+  display: flex; /* Use Flexbox for layout */
+  gap: 10px; /* Space between elements */
+  align-items: center; /* Center items vertically */
 }
 
-.App-link {
-  color: #61dafb;
+/* Container for the right section (buttons) */
+.right-section {
+  display: flex; /* Use Flexbox for layout */
+  gap: 10px; /* Space between elements */
+  align-items: center; /* Center items vertically */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Optional: Style for buttons */
+.header .ant-btn {
+  margin-right: 10px; /* Space between buttons */
 }
