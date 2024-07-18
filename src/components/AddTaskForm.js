@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Form, Input, Select } from 'antd';
 import axios from 'axios';
+import TaskStatusDropdown from './TaskStatusDropdown';
 
 const { Option } = Select;
 
@@ -69,7 +70,7 @@ function AddTaskForm({ users, taskStatuses, isVisible, onClose, onAddTask }) {
           <Select placeholder="Select a status">
             {taskStatuses.map(status => (
               <Option key={status.id} value={status.id}>
-                {status.name}
+                {status.status}
               </Option>
             ))}
           </Select>
@@ -87,4 +88,3 @@ function AddTaskForm({ users, taskStatuses, isVisible, onClose, onAddTask }) {
 }
 
 export default AddTaskForm;
-
