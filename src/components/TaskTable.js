@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Popconfirm, Table, Typography, Button } from 'antd';
+import { Form, Input, Popconfirm, Table, Typography, Checkbox } from 'antd';
 import axios from 'axios';
-import EditableCell from './EditableCell'; // Ensure EditableCell is imported correctly
+import EditableCell from './EditableCell';
 
-const TaskTable = ({ tasks, users, statuses, onDelete }) => {
+const TaskTable = ({ tasks, onDelete, onSelectTask }) => {
   const [form] = Form.useForm();
   const [data, setData] = useState([]);
   const [editingKey, setEditingKey] = useState('');
+  const [selectedTaskKey, setSelectedTaskKey] = useState(null);
 
   const isEditing = (record) => record.key === editingKey;
-
-  const edit = (record) => {
-    form.setFieldsValue({ task: record.task, ...record });
-    setEditingKey(record.key);
-  };
 
   const cancel = () => {
     setEditingKey('');
@@ -56,6 +52,11 @@ const TaskTable = ({ tasks, users, statuses, onDelete }) => {
     }
   };
 
+  const handleRowClick = (record) => {
+    setSelectedTaskKey(record.key);
+    onSelectTask(record);
+  };
+
   useEffect(() => {
     const formattedData = tasks.map((task) => ({
       key: task.id,
@@ -92,20 +93,16 @@ const TaskTable = ({ tasks, users, statuses, onDelete }) => {
       dataIndex: 'operation',
       render: (_, record) => (
         <span>
-          {/* The Edit button has been removed */}
           <Popconfirm
             title="Are you sure to delete this task?"
             onConfirm={() => deleteTask(record.key)}
           >
-            <Button type="link" danger>
-              Delete
-            </Button>
+            <Typography.Link>Delete</Typography.Link>
           </Popconfirm>
         </span>
       ),
     },
   ];
-  
 
   const mergedColumns = columns.map((col) => {
     if (!col.editable) {
@@ -140,9 +137,19 @@ const TaskTable = ({ tasks, users, statuses, onDelete }) => {
         pagination={{
           onChange: cancel,
         }}
+        onRow={(record) => ({
+          onClick: () => handleRowClick(record),
+        })}
+        rowSelection={{
+          type: 'radio',
+          selectedRowKeys: [selectedTaskKey],
+          onChange: (selectedRowKeys) => setSelectedTaskKey(selectedRowKeys[0]),
+        }}
       />
     </Form>
   );
 };
 
 export default TaskTable;
+
+

@@ -1,3 +1,4 @@
+/*
 import React, { useEffect, useRef } from 'react';
 import { Form, Input } from 'antd';
 
@@ -41,6 +42,46 @@ const EditableCell = ({
   );
 
   return <td {...restProps}>{childNode}</td>;
+};
+
+export default EditableCell;
+*/
+import React from 'react';
+import { Form, Input } from 'antd';
+
+const EditableCell = ({
+  editing,
+  dataIndex,
+  title,
+  inputType,
+  record,
+  index,
+  children,
+  ...restProps
+}) => {
+  const inputNode = inputType === 'number' ? <Input /> : <Input />;
+  return (
+    <td {...restProps}>
+      {editing ? (
+        <Form.Item
+          name={dataIndex}
+          style={{
+            margin: 0,
+          }}
+          rules={[
+            {
+              required: true,
+              message: `Please Input ${title}!`,
+            },
+          ]}
+        >
+          {inputNode}
+        </Form.Item>
+      ) : (
+        children
+      )}
+    </td>
+  );
 };
 
 export default EditableCell;
