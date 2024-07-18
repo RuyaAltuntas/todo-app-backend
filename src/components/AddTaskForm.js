@@ -80,7 +80,9 @@ function AddTaskForm({ users, taskStatuses, isVisible, onClose, onAddTask }) {
           label="Task Title"
           rules={[{ required: true, message: 'Please input the task title!' }]}
         >
-          <Input />
+      
+
+      <Input placeholder="Enter task title" />
         </Form.Item>
       </Form>
     </Modal>
